@@ -1,34 +1,69 @@
-const LOCATION_SEARCH_URL = '';
+const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
+const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 
-function getDataFromApi(searchLocation, callback) {
+function getLocationFromApi(searchLocation, callback) {
   const settings = {
     url: LOCATION_SEARCH_URL,
     data: {
-      key: #,
-      address: `${searchLocation}`,
-      limit: 10
-      
+      key: '#',
+      address: `${searchLocation}`,      
     },
     dataType: 'json',
     type: 'GET',
     success: callback
   };
-    console.log(settings)
-  $.ajax(settings);
+  $.ajax(settings);  
+}
+
+function nearbyFromApi(searchTerm, lat, lng, callback) {
+  const settings = {
+    url: NEARBY_SEARCH_URL,
+    data: {
+      key: '#',
+      keyword: `${searchTerm}`, 
+      location: `${lat},${lng}`,
+      // radius: '10000',
+      rankby: 'prominence',          
+    },
+    dataType: 'json',
+    type: 'GET',
+    success: callback
+  };
+  $.ajax(settings);  
 }
 
 function renderResult(result) {
   return `
     <div>
       <h2>       
-        <div class="results">${result...}</div>
+        <div class="results">${result.name}</div>
     </div>
   `;
 };
 
-function displaySearchData(data) {
-  //const results = data.events.map((item, index) => renderResult(item));
+function displaySearchData(callbackData) {
+  const placeResults = callbackData.results.map((item, index) => renderResult(item));
+  $('.js-search-results').html(placeResults);
+  console.log(placeResults);
+}
+
+function nearbySearch(callbackData) {
+  const geolocation = callbackData.results[0].geometry.location
+  const {lat, lng} = geolocation
+  console.log(`${lat},${lng}`);
+
+  $('.js-search-form').submit(event => {
+    event.preventDefault();
+    const querySearchTerm = $(event.currentTarget).find('.js-search-term');
+    const searchTerm = querySearchTerm.val();
+    //clear out input
+    querySearchTerm.val("");
+    nearbyFromApi(searchTerm, lat, lng, displaySearchData);
+    console.log(searchTerm);
+
+
   //$('.js-search-results').html(results);
+  });
 };
 
 
@@ -36,13 +71,17 @@ function displaySearchData(data) {
 function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
-    const queryTarget = $(event.currentTarget).find('.js-query');
-    const query = queryTarget.val();
+    const queryLocationTarget = $(event.currentTarget).find('.js-location-search');
+    const location = queryLocationTarget.val();
+    //const querySearchTerm = $(event.currentTarget).find('.js-search-term');
+    //const searchTerm = querySearchTerm.val();
     // clear out the input
-    queryTarget.val("");
-    getDataFromApi(query, displaySearchData);
-    console.log(query)
-    console.log(queryTarget)
+    queryLocationTarget.val("");
+    getLocationFromApi(location, nearbySearch);
+    //nearbyFromApi(searchTerm, displaySearchData);
+    console.log(location);
+    //console.log(searchTerm);
   });
 };
 $(watchSubmit);
+
