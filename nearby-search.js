@@ -1,11 +1,27 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
+searchTerm = null;
+
+function getDetails() {
+  const settings = {
+    url: PLACE_DETAILS,
+    data: {
+      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      placeid: '',
+    }
+    dataType: 'json',
+    type: 'GET',
+    success: callback
+  };
+  $.ajax(settings);
+}
 
 function getLocationFromApi(searchLocation, callback) {
   const settings = {
     url: LOCATION_SEARCH_URL,
     data: {
-      key: '#',
+      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
       address: `${searchLocation}`,      
     },
     dataType: 'json',
@@ -15,15 +31,15 @@ function getLocationFromApi(searchLocation, callback) {
   $.ajax(settings);  
 }
 
-function nearbyFromApi(searchTerm, lat, lng, callback) {
+function nearbyFromApi(keyword, lat, lng, callback) {
   const settings = {
     url: NEARBY_SEARCH_URL,
     data: {
-      key: '#',
-      keyword: `${searchTerm}`, 
+      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      keyword: `${keyword}`, 
       location: `${lat},${lng}`,
-      // radius: '10000',
-      rankby: 'prominence',          
+      //radius: '10000',
+      rankby: 'distance',          
     },
     dataType: 'json',
     type: 'GET',
@@ -48,39 +64,39 @@ function displaySearchData(callbackData) {
 }
 
 function nearbySearch(callbackData) {
+  //console.log(callbackData)
   const geolocation = callbackData.results[0].geometry.location
   const {lat, lng} = geolocation
   console.log(`${lat},${lng}`);
-
-  $('.js-search-form').submit(event => {
-    event.preventDefault();
-    const querySearchTerm = $(event.currentTarget).find('.js-search-term');
-    const searchTerm = querySearchTerm.val();
+  let keyword = searchTerm;
+  //$('.js-search-form').submit(event => {
+    //event.preventDefault();
+   // const querySearchTerm = $(event.currentTarget).find('.js-search-term');
+   // const searchTerm = querySearchTerm.val();
     //clear out input
-    querySearchTerm.val("");
-    nearbyFromApi(searchTerm, lat, lng, displaySearchData);
-    console.log(searchTerm);
+   // querySearchTerm.val("");
+    nearbyFromApi(keyword, lat, lng, displaySearchData);
+    
 
 
   //$('.js-search-results').html(results);
-  });
+  //});
 };
-
-
 
 function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     const queryLocationTarget = $(event.currentTarget).find('.js-location-search');
     const location = queryLocationTarget.val();
-    //const querySearchTerm = $(event.currentTarget).find('.js-search-term');
-    //const searchTerm = querySearchTerm.val();
+    const querySearchTerm = $(event.currentTarget).find('.js-search-term');
+    searchTerm = querySearchTerm.val();
     // clear out the input
     queryLocationTarget.val("");
+    querySearchTerm.val("");
     getLocationFromApi(location, nearbySearch);
     //nearbyFromApi(searchTerm, displaySearchData);
     console.log(location);
-    //console.log(searchTerm);
+    console.log(searchTerm);
   });
 };
 $(watchSubmit);
