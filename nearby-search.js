@@ -3,20 +3,6 @@ const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysear
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
 searchTerm = null;
 
-function getDetails() {
-  const settings = {
-    url: PLACE_DETAILS,
-    data: {
-      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
-      placeid: '',
-    }
-    dataType: 'json',
-    type: 'GET',
-    success: callback
-  };
-  $.ajax(settings);
-}
-
 function getLocationFromApi(searchLocation, callback) {
   const settings = {
     url: LOCATION_SEARCH_URL,
@@ -48,6 +34,28 @@ function nearbyFromApi(keyword, lat, lng, callback) {
   $.ajax(settings);  
 }
 
+function getDetails(id) {
+  const settings = {
+    url: PLACE_DETAILS,
+    data: {
+      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      placeid: `${id}`,
+    },
+    dataType: 'json',
+    type: 'GET',
+    success: renderDetails
+  };
+  $.ajax(settings);
+}
+
+function renderDetails(callBackData) {
+  return `
+    <div>     
+        <div class="results">${callBackData.result.rating}</div>
+    </div>
+  `;
+};
+
 function renderResult(result) {
   return `
     <div>
@@ -58,6 +66,7 @@ function renderResult(result) {
 };
 
 function displaySearchData(callbackData) {
+  //const placeDetails = callbackData.results.place_id.map((id, index) => getDetails(id));
   const placeResults = callbackData.results.map((item, index) => renderResult(item));
   $('.js-search-results').html(placeResults);
   console.log(placeResults);
