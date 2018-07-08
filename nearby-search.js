@@ -2,12 +2,13 @@ const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
 searchTerm = null;
+key = '';
 
 function getLocationFromApi(searchLocation, callback) {
   const settings = {
     url: LOCATION_SEARCH_URL,
     data: {
-      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      key: '#',
       address: `${searchLocation}`,      
     },
     dataType: 'json',
@@ -21,7 +22,7 @@ function nearbyFromApi(keyword, lat, lng, callback) {
   const settings = {
     url: NEARBY_SEARCH_URL,
     data: {
-      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      key: '#',
       keyword: `${keyword}`, 
       location: `${lat},${lng}`,
       //radius: '10000',
@@ -38,7 +39,7 @@ function getDetails(id) {
   const settings = {
     url: PLACE_DETAILS,
     data: {
-      key: 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4',
+      key: '#',
       placeid: `${id}`,
     },
     dataType: 'json',
