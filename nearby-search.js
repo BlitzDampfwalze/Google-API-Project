@@ -1,8 +1,25 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
+const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
-key = '#';
+key = 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4';
+appId = '6e3066cd484952d8fefaacbfe916af4a';
+
+function getWeather(lat, lng, callback) {
+  const settings = {
+    url: WEATHER_URL,
+    data: {
+      lat: lat,
+      lon: lng,
+      APPID: appId
+    },
+    dataType: 'json',
+    type: 'GET',
+    success: callback
+  };
+  $.ajax(settings);
+}
 
 function getLocationFromApi(searchLocation, callback) {
   const settings = {
@@ -50,11 +67,16 @@ function getDetails(id) {
 }
 
 function renderDetails(callBackData) {
-  return `
-    <div>     
+  $('.js-search-results').append(`<div>     
         <div class="results">${callBackData.result.rating}</div>
-    </div>
-  `;
+    </div>`);
+};
+
+function renderWeather(result) {
+  $('.js-search-results').append(`
+        <div class="results">${weather.description}
+        1.8*(${main.temp}-273)+32
+        ${main.humidity}</div>`);
 };
 
 function renderResult(result) {
@@ -86,6 +108,7 @@ function nearbySearch(callbackData) {
     //clear out input
    // querySearchTerm.val("");
     nearbyFromApi(keyword, lat, lng, displaySearchData);
+    getWeather(lat, lng, renderWeather);
     
 
 

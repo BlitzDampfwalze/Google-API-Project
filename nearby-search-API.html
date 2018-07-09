@@ -5,20 +5,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+   
+    <!-- CSS Reset -->
+    <link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link href="flex-layout.css" rel="stylesheet" type="text/css" />
     <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<header>
-		<h1>Icon/logo? App Name</h1>
-		<h1>Find places or nearby things to do!</h1> <!-- format to smaller text -->
+		<h1 class="heading">Find Places & Things to Do!
+			<i class="fa fa-search" aria-hidden="true"></i></h1>
 	</header>
 	<main>
 		<form action="#" class="js-search-form">
-  		Location: <input type="text" name="location" class="js-location-search"> <!-- value="Address, City, State, Intersection, and/or Zipcode" -->
+  		Location: <input type="text" name="location" class="js-location-search" placeholder="Intersection, City, or Zipcode, etc..." size="28">
   		What are you looking for?: <input type="text" name="search-term" class="js-search-term">
   		<button type="submit">Search</button>
-			<div>Sort by: (??)</div>
 		</form>
 
 		<div class="js-search-results">

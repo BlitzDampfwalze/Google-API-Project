@@ -1,0 +1,27 @@
+.heading {
+	font-size: 3rem;
+	font-family: 'Lobster', cursive;
+	font-weight: bold;
+	background: blue;
+	/*display: inline-block;*/
+	/*border-style: outset;*/
+	padding: 15px;
+	border: 5px ridge white;
+
+}
+
+i {
+	font-size: 4rem;
+}
+
+form {
+	padding: 15px;
+	font-size: 1.5rem;
+}
+
+/* get the styles for both icon*/
+@import "http://cssicon.space/css/icons.css";
+
+.icon, .icon:before, .icon:after, .icon i, .icon i:before, .icon i:after { 
+  transition: all 0.4s ease;
+}
