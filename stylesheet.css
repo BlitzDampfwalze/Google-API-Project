@@ -3,7 +3,6 @@
 	font-family: 'Lobster', cursive;
 	font-weight: bold;
 	background: blue;
-	/*display: inline-block;*/
 	/*border-style: outset;*/
 	padding: 15px;
 	border: 5px ridge white;
@@ -17,6 +16,24 @@ i {
 form {
 	padding: 15px;
 	font-size: 1.5rem;
+	max-width: 400px;
+}
+
+input {
+	font-size: 1.25rem;
+}
+
+.form-text {
+	padding: 10px 0;
+}
+
+.js-search-results {
+	padding: 0 15px 15px;
+	font-size: 1.5rem;
+}
+
+.results {
+	padding: 7.5px;
 }
 
 /* get the styles for both icon*/

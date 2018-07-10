@@ -3,7 +3,8 @@ const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysear
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
 const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
-
+key = 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4';
+appId = '6e3066cd484952d8fefaacbfe916af4a';
 
 function getWeather(lat, lng, callback) {
   const settings = {
@@ -79,15 +80,18 @@ function renderWeather(result) {
 };
 
 function renderResult(result) {
+
   return `
     <div>
       <h2>       
         <div class="results">${result.name}</div>
+        <div class="results">${result.place_id}</div>
     </div>
   `;
 };
 
 function displaySearchData(callbackData) {
+  //create an array//
   //const placeDetails = callbackData.results.place_id.map((id, index) => getDetails(id));
   const placeResults = callbackData.results.map((item, index) => renderResult(item));
   $('.js-search-results').html(placeResults);
