@@ -1,8 +1,10 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
-const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
+const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/json';
 const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
+key = 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4';
+appId = '6e3066cd484952d8fefaacbfe916af4a';
 
 
 function getWeather(lat, lng, callback) {
@@ -66,7 +68,7 @@ function getDetails(id) {
 }
 
 function renderDetails(callBackData) {
-  $('.js-search-results').append(`<div>     
+  $('results.').append(`<div>     
         <div class="results">${callBackData.result.rating}</div>
     </div>`);
 };
@@ -79,20 +81,21 @@ function renderWeather(result) {
 };
 
 function renderResult(result) {
-
-  return `
-    <div>
+//let id = result.place_id
+  `<div>
       <h2>       
         <div class="results">${result.name}</div>
-        <div class="results">${result.place_id}</div>
     </div>
   `;
 };
 
 function displaySearchData(callbackData) {
   //create an array//
-  //const placeDetails = callbackData.results.place_id.map((id, index) => getDetails(id));
-  const placeResults = callbackData.results.map((item, index) => renderResult(item));
+  //callbackData.results.map((item, index) => 
+  //callbackData.results.map((item, index) => getDetails(item.place_id));
+  const placeResults = callbackData.results.map((item, index) => { 
+    `<div class="results">${result.name}</div>`;
+    getDetails(item.place_id);});
   $('.js-search-results').html(placeResults);
   console.log(placeResults);
 }
