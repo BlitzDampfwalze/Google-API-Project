@@ -15,19 +15,23 @@
     <link href="stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-		<h1 class="heading">Find Places & Things to Do!
-			<i class="fa fa-search" aria-hidden="true"></i></h1>
+		<h1 class="heading">Find Places & Things to Do!<i class="fa fa-search fa-fw" aria-hidden="true"></i></h1>
 	</header>
 	<main>
 		<form action="#" class="js-search-form">
-  		<div class="form-text">Location:</div> <input type="text" name="location" class="js-location-search" placeholder="Intersection, City, or Zipcode, etc..." size="28">
-  		<div class="form-text">What are you looking for?:</div> <input type="text" name="search-term" class="js-search-term">
-  		<button type="submit">Search</button>
+			<div class="form-text form">Location:</div> 
+				<input type="text" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
+			<div class="form-text form">What are you looking for?</div> 
+				<input type="text" name="search-term" class="js-search-term form" size="28">
+			<button class="form" type="submit">Search</button>
 		</form>
-
-		<div class="js-search-results">
+		<div id="background">
+				<div class="js-search-results">
+					some text
 			
-		</div>		
+				</div>
+				<div>second column</div>		
+		</div>
 	</main>
 	<script src="nearby-search.js"></script>
 </body>
