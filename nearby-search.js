@@ -1,6 +1,6 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
-const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/output';
+const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/json';
 const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
 key = 'AIzaSyBk_OjFoaTqmKgDpGuz1svo-a7OrwKsgV4';
@@ -48,6 +48,10 @@ function nearbyFromApi(keyword, lat, lng, callback) {
     dataType: 'json',
     type: 'GET',
     success: callback
+      // data => {
+      // callback;
+      // const arrayIds = []
+      // arrayIds.push(data.results.place_id)
   };
   $.ajax(settings);  
 }
@@ -61,62 +65,42 @@ function getDetails(id) {
     },
     dataType: 'json',
     type: 'GET',
-    success: renderDetails
-  };
+    success: function(callBackData) { 
+      console.log(id);
+      console.log(callBackData.result.rating);
+                  $(`#${id}`).append(`<div>${callBackData.result.rating}</div>`)
+                }}
+                
   $.ajax(settings);
 }
 
-function renderDetails(callBackData) {
-  $('.js-search-results').append(`<div>     
-        <div class="results">${callBackData.result.rating}</div>
-    </div>`);
-};
 
-function renderWeather(result) {
-  $('.js-search-results').append(`
-        <div class="results">${weather.description}
-        1.8*(${main.temp}-273)+32
-        ${main.humidity}</div>`);
-};
 
 function renderResult(result) {
-
-  return `
-    <div>
-      <h2>       
-        <div class="results">${result.name}</div>
-        <div class="results">${result.place_id}</div>
-    </div>
-  `;
+  let id = result.place_id;
+  return(`     
+        <div class="results" id="${id}">${result.name}</div>
+  `);
 };
 
 function displaySearchData(callbackData) {
-  //create an array//
-  //const placeDetails = callbackData.results.place_id.map((id, index) => getDetails(id));
   const placeResults = callbackData.results.map((item, index) => renderResult(item));
   $('.js-search-results').html(placeResults);
-  console.log(placeResults);
+  displayDetails(callbackData);
+}
+
+function displayDetails(callbackData) {
+  callbackData.results.map((item, index) => getDetails(item.place_id));
 }
 
 function nearbySearch(callbackData) {
-  //console.log(callbackData)
   const geolocation = callbackData.results[0].geometry.location
   const {lat, lng} = geolocation
   console.log(`${lat},${lng}`);
   let keyword = searchTerm;
-  //$('.js-search-form').submit(event => {
-    //event.preventDefault();
-   // const querySearchTerm = $(event.currentTarget).find('.js-search-term');
-   // const searchTerm = querySearchTerm.val();
-    //clear out input
-   // querySearchTerm.val("");
-    nearbyFromApi(keyword, lat, lng, displaySearchData);
+
+    nearbyFromApi(keyword, lat, lng, displaySearchData); // Makes an API call with the search term and the geolocation and calls a function to display the results
     getWeather(lat, lng, renderWeather);
-    
-
-
-  //$('.js-search-results').html(results);
-  //});
 };
 
 function watchSubmit() {
@@ -126,14 +110,19 @@ function watchSubmit() {
     const location = queryLocationTarget.val();
     const querySearchTerm = $(event.currentTarget).find('.js-search-term');
     searchTerm = querySearchTerm.val();
-    // clear out the input
     queryLocationTarget.val("");
     querySearchTerm.val("");
-    getLocationFromApi(location, nearbySearch);
-    //nearbyFromApi(searchTerm, displaySearchData);
+
+    getLocationFromApi(location, nearbySearch); // Makes an API call with locations input and calls function to retrieve geo-coordinates
     console.log(location);
     console.log(searchTerm);
   });
 };
 $(watchSubmit);
 
+function renderWeather(result) {
+  $('.js-search-results').append(`
+        <div class="results">${weather.description}
+        1.8*(${main.temp}-273)+32
+        ${main.humidity}</div>`);
+};
