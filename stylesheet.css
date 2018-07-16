@@ -1,3 +1,16 @@
+body {
+
+}
+
+#heading-inputs {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	/* vertical-align: baseline; */
+	/* position: fixed; */
+}
+
+
 .heading {
 	font-size: 3rem;
 	font-family: 'Lobster', cursive;
@@ -9,19 +22,20 @@
 }
 
 
-#background {
+#background-image {
 	display: flex;
-	flex-direction: row
-	/* display: block; */
-	background-image: url("points-of-interest.jpg");
-	/* background-size: auto;	 */
-	background-repeat: no-repeat;	
-	height: 500px;
-	/* width: 100%; */
-	margin: 0 auto;	
-}
+	justify-content: center;
+	text-align: center;
+		/* how to get height to auto-adjust but always show background image */
+	height: 500px; 
+		/* margin: auto;
+    	width: 50%; */
+	background:linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("points-of-interest.jpg") no-repeat center center;
+		/* opacity: 0.5; */
+	}
 
 i {
+	/* icon by the heading */
 	font-size: 4rem;
 }
 
@@ -36,6 +50,7 @@ input {
 }
 
 .form-text {
+	font-weight: bold;
 	padding: 10px 0;
 }
 
@@ -50,12 +65,20 @@ button {
 
 }
 
+#results-background {
+
+}
 .js-search-results {
+	text-align: center;
 	padding: 0 15px 15px;
 	font-size: 1.5rem;
+
 
 }
 
 .results {
-	padding: 7.5px;
+	font-size: 2.0rem;
+	font-weight: bold;
+	text-shadow: 2px 2px white;
+	padding: 20px;
 }
