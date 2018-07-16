@@ -5,14 +5,13 @@ const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
 
 
-
 function getWeather(lat, lng, callback) {
   const settings = {
     url: WEATHER_URL,
     data: {
       lat: lat,
       lon: lng,
-      APPID: appId
+      APPID: config.APP_ID
     },
     dataType: 'json',
     type: 'GET',
@@ -25,7 +24,7 @@ function getLocationFromApi(searchLocation, callback) {
   const settings = {
     url: LOCATION_SEARCH_URL,
     data: {
-      key: key,
+      key: config.KEY,
       address: `${searchLocation}`,      
     },
     dataType: 'json',
@@ -39,7 +38,7 @@ function nearbyFromApi(keyword, lat, lng, callback) {
   const settings = {
     url: NEARBY_SEARCH_URL,
     data: {
-      key: key,
+      key: config.KEY,
       keyword: `${keyword}`, 
       location: `${lat},${lng}`,
       //radius: '10000',
@@ -48,10 +47,6 @@ function nearbyFromApi(keyword, lat, lng, callback) {
     dataType: 'json',
     type: 'GET',
     success: callback
-      // data => {
-      // callback;
-      // const arrayIds = []
-      // arrayIds.push(data.results.place_id)
   };
   $.ajax(settings);  
 }
@@ -60,7 +55,7 @@ function getDetails(id) {
   const settings = {
     url: PLACE_DETAILS,
     data: {
-      key: key,
+      key: config.KEY,
       placeid: `${id}`,
     },
     dataType: 'json',
@@ -68,7 +63,10 @@ function getDetails(id) {
     success: function(callBackData) { 
       console.log(id);
       console.log(callBackData.result.rating);
-                  $(`#${id}`).append(`<div>${callBackData.result.rating}</div>`)
+                  $(`#${id}`).append(`<div>Rating: ${callBackData.result.rating}/5</div>`)
+                  $(`#${id}`).append(`<div><a href="${callBackData.result.website}">website</a></div>`)
+                  $(`#${id}`).append(`<div>${callBackData.result.formatted_address}</div>`)
+                  $(`#${id}`).append(`<div>${callBackData.result.formatted_phone_number}</div>`) 
                 }}
                 
   $.ajax(settings);
