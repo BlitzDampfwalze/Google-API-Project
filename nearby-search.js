@@ -4,7 +4,6 @@ const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/json';
 const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
 
-
 function getWeather(lat, lng, callback) {
   const settings = {
     url: WEATHER_URL,
@@ -41,7 +40,6 @@ function nearbyFromApi(keyword, lat, lng, callback) {
       key: config.KEY,
       keyword: `${keyword}`, 
       location: `${lat},${lng}`,
-      //radius: '10000',
       rankby: 'distance',          
     },
     dataType: 'json',
@@ -61,8 +59,6 @@ function getDetails(id) {
     dataType: 'json',
     type: 'GET',
     success: function(callBackData) { 
-      console.log(id);
-      console.log(callBackData.result.rating);
                   $(`#${id}`).append(`<div>Rating: ${callBackData.result.rating}/5</div>`)
                   $(`#${id}`).append(`<div><a href="${callBackData.result.website}">website</a></div>`)
                   $(`#${id}`).append(`<div>${callBackData.result.formatted_address}</div>`)
@@ -71,8 +67,6 @@ function getDetails(id) {
                 
   $.ajax(settings);
 }
-
-
 
 function renderResult(result) {
   let id = result.place_id;
@@ -94,7 +88,6 @@ function displayDetails(callbackData) {
 function nearbySearch(callbackData) {
   const geolocation = callbackData.results[0].geometry.location
   const {lat, lng} = geolocation
-  console.log(`${lat},${lng}`);
   let keyword = searchTerm;
 
     nearbyFromApi(keyword, lat, lng, displaySearchData); // Makes an API call with the search term and the geolocation and calls a function to display the results
@@ -106,21 +99,21 @@ function watchSubmit() {
     event.preventDefault();
     const queryLocationTarget = $(event.currentTarget).find('.js-location-search');
     const location = queryLocationTarget.val();
+
     const querySearchTerm = $(event.currentTarget).find('.js-search-term');
     searchTerm = querySearchTerm.val();
+    
     queryLocationTarget.val("");
     querySearchTerm.val("");
 
     getLocationFromApi(location, nearbySearch); // Makes an API call with locations input and calls function to retrieve geo-coordinates
-    console.log(location);
-    console.log(searchTerm);
   });
 };
 $(watchSubmit);
 
 function renderWeather(result) {
   $('.js-search-results').append(`
-        <div class="results">${weather.description}
-        1.8*(${main.temp}-273)+32
-        ${main.humidity}</div>`);
+        <div class="results">${result.weather.description}
+        1.8*(${result.main.temp}-273)+32
+        ${result.main.humidity}</div>`);
 };
