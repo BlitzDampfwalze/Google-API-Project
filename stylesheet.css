@@ -1,5 +1,5 @@
 body {
-
+	/* background-color: grey; */
 }
 
 #heading-inputs {
@@ -10,27 +10,33 @@ body {
 	/* position: fixed; */
 }
 
-
-.heading {
-	font-size: 3rem;
+h1 {
+	font-size: 3.5rem;
 	font-family: 'Lobster', cursive;
 	font-weight: bold;
+	margin: 0px;
 	/*background: blue;*/
-	/*border-style: outset;*/
-	padding: 15px;
+	/* border-style: outset; */
 	/*border: 5px ridge white;*/
 }
 
+#heading {
+	background:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.995)), url("points-of-interest.jpg") repeat center center;
+	background-size: 100%;
+	padding: 40px;
+
+}
 
 #background-image {
 	display: flex;
 	justify-content: center;
 	text-align: center;
 		/* how to get height to auto-adjust but always show background image */
-	height: 500px; 
+	height: 100%; 
 		/* margin: auto;
     	width: 50%; */
-	background:linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("points-of-interest.jpg") no-repeat center center;
+	background:linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("background.jpg") repeat center 0;
+	background-size: 100%;
 		/* opacity: 0.5; */
 	}
 
@@ -41,8 +47,10 @@ i {
 
 form {
 	padding: 15px;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	max-width: 400px;
+	text-shadow: #FC0 1px 0 10px;
+	font-weight: bold;
 }
 
 input {
@@ -65,9 +73,6 @@ button {
 
 }
 
-#results-background {
-
-}
 .js-search-results {
 	text-align: center;
 	padding: 0 15px 15px;
@@ -79,6 +84,18 @@ button {
 .results {
 	font-size: 1.5rem;
 	font-weight: bold;
-	text-shadow:rgb(71, 67, 67) 1px 0 7px;
+	color: black;
+	/* text-shadow:black 1.4px 1.45px 1.4px; */
 	padding: 20px;
+	border-radius: 100px;
+	/* border-style: ridge;
+	border-color: rgb(255, 223, 44);
+	border-width: 8px;
+	border-radius: 150px; */
+	/* border-radius: 15px;
+	border-style: 18px  outset;
+	border: solid black 0.5px; */
+	background: rgba(255, 255, 255, 0.6);
+	width: auto;
+	margin: 12px;
 }

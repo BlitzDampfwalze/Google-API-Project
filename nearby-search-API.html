@@ -17,25 +17,21 @@
 	
 </head>
 <body>
-	<div>
-	<div id="heading-inputs">
-		<h1 class="heading">Find Places & Things to Do!<i class="fa fa-search fa-fw" aria-hidden="true"></i></h1>
-	</header>
+	<div id="heading">
+		<h1>Find Places & Things to Do!<i class="fa fa-search fa-fw" aria-hidden="true"></i></h1>
 
 		<form action="#" class="js-search-form">
 			<div class="form-text form">Location:</div> 
 				<input type="text" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
 			<div class="form-text form">What are you looking for?</div> 
-				<input type="text" name="search-term" class="js-search-term form" size="28">
+				<input type="text" name="search-term" class="js-search-term form" placeholder="museums, parks, music, food, etc..." size="28">
 			<button class="form" type="submit">Search</button>
 		</form>
 	</div>
-	</div>
+
 	<main>
 		<div id="background-image">
-			<div id="results-background">
 				<div class="js-search-results"></div>
-			</div>
 		</div>
 	</main>
 	<script src="nearby-search.js"></script>

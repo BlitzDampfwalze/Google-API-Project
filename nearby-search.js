@@ -60,9 +60,9 @@ function getDetails(id) {
     type: 'GET',
     success: function(callBackData) { 
                   $(`#${id}`).append(`<div>Rating: ${callBackData.result.rating}/5</div>`)
-                  $(`#${id}`).append(`<div><a href="${callBackData.result.website}">website</a></div>`)
                   $(`#${id}`).append(`<div>${callBackData.result.formatted_address}</div>`)
-                  $(`#${id}`).append(`<div>${callBackData.result.formatted_phone_number}</div>`) 
+                  $(`#${id}`).append(`<div>${callBackData.result.formatted_phone_number}</div>`)
+                  $(`#${id}`).append(`<div><a href="${callBackData.result.website}">website</a></div>`)                  
                 }}
                 
   $.ajax(settings);
@@ -70,7 +70,8 @@ function getDetails(id) {
 
 function renderResult(result) {
   let id = result.place_id;
-  return(`     
+  return(`
+        <h2>     
         <div class="results" id="${id}">${result.name}</div>
   `);
 };
