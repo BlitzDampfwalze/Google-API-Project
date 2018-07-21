@@ -11,29 +11,33 @@
     <link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <link href="flex-layout.css" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet" type="text/css" />
 	<link href="stylesheet.css" rel="stylesheet" type="text/css" />
 	
 </head>
 <body>
-	<div id="heading">
-		<h1>Find Places & Things to Do!<i class="fa fa-search fa-fw" aria-hidden="true"></i></h1>
+			<header id="heading" role="banner">
+				<div id="icon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></div> 
+				<h1>Find Places & Things to Do! </h1>
+			</header>
+			
 
-		<form action="#" class="js-search-form">
-			<div class="form-text form">Location:</div> 
-				<input type="text" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
-			<div class="form-text form">What are you looking for?</div> 
-				<input type="text" name="search-term" class="js-search-term form" placeholder="museums, parks, music, food, etc..." size="28">
-			<button class="form" type="submit">Search</button>
-		</form>
-	</div>
+			<div class="form-holder">
+				<form action="#" class="js-search-form">
+					<div class="form-text form">Location:</div> 
+						<input type="text" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
+					<div class="form-text form">What are you looking for?</div> 
+						<input type="text" name="search-term" class="js-search-term form" placeholder="museums, parks, music, food, etc..." size="28">
+					<button class="form" type="submit">Search</button>
+				</form>
+				<div id="weather"></div>
+			</div>
+					<main class="js-search-results" role="main" aria-live="assertive" hidden>
+						<!-- search results go here -->
+					</main>
 
-	<main>
-		<div id="background-image">
-				<div class="js-search-results"></div>
-		</div>
-	</main>
 	<script src="nearby-search.js"></script>
 </body>
 </html>

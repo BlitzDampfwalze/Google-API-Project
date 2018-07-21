@@ -1,101 +1,92 @@
 body {
-	/* background-color: grey; */
-}
-
-#heading-inputs {
-	display: flex;
-	flex-direction: column;
-	/* justify-content: center; */
-	/* vertical-align: baseline; */
-	/* position: fixed; */
+	width: 100%;
+	background:linear-gradient(to right, rgba(255,255,255,0.75), rgba(255,255,255,0.01)), url("cam-dicecca-116639-unsplash.jpg") 100% 80%;
+	background-size: 100%;
+	padding: 40px;
 }
 
 h1 {
-	font-size: 3.5rem;
+	font-size: 3.5em;
 	font-family: 'Lobster', cursive;
 	font-weight: bold;
-	margin: 0px;
-	/*background: blue;*/
-	/* border-style: outset; */
-	/*border: 5px ridge white;*/
+	text-shadow: white 5px 5px 9px;
 }
-
-#heading {
-	background:linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.995)), url("points-of-interest.jpg") repeat center center;
-	background-size: 100%;
-	padding: 40px;
-
-}
-
-#background-image {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-		/* how to get height to auto-adjust but always show background image */
-	height: 100%; 
-		/* margin: auto;
-    	width: 50%; */
-	background:linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("background.jpg") repeat center 0;
-	background-size: 100%;
-		/* opacity: 0.5; */
-	}
 
 i {
-	/* icon by the heading */
-	font-size: 4rem;
+	font-size: 5rem;
+	text-shadow: white 5px 5px 9px;	
+}
+
+.weather h2 {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.weather {
+	font-family: 'Merienda', cursive;
+	font-size: 1.5em;
+	padding: 25px;
+	background-color:  rgba(255,255,255,0.8);
+	border-bottom: orange solid 5px;
+	border-right: orange solid 5px;
+	border-style: ridge;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
 
 form {
-	padding: 15px;
-	font-size: 2rem;
-	max-width: 400px;
+	/* padding: 15px; */
+	font-size: 1.75em;
+	/* max-width: 450px; */
 	text-shadow: #FC0 1px 0 10px;
 	font-weight: bold;
 }
 
 input {
-	font-size: 1.25rem;
+	font-size: 0.75em;
 }
 
 .form-text {
+	font-family: 'Merienda', cursive;
 	font-weight: bold;
 	padding: 10px 0;
 }
 
 button {
+	font-family: 'Merienda', cursive;
 	margin-top: 10px;
-	font-size: 1.5rem;
+	font-size: 0.75em;
 	width: 100%
 	height: 35px;
 	font-weight: bold;
 	background-color: gold;
 	border-radius: 8px;
+}
 
+.result-name {
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 .js-search-results {
+	margin-top: 45px;
 	text-align: center;
 	padding: 0 15px 15px;
-	font-size: 1.5rem;
-
 
 }
 
 .results {
-	font-size: 1.5rem;
+	font-family: 'Merienda', cursive;
 	font-weight: bold;
+	font-size: 1.4em;
 	color: black;
-	/* text-shadow:black 1.4px 1.45px 1.4px; */
 	padding: 20px;
 	border-radius: 100px;
-	/* border-style: ridge;
-	border-color: rgb(255, 223, 44);
-	border-width: 8px;
-	border-radius: 150px; */
-	/* border-radius: 15px;
-	border-style: 18px  outset;
-	border: solid black 0.5px; */
 	background: rgba(255, 255, 255, 0.6);
-	width: auto;
 	margin: 12px;
+	width: auto;
 }
+
+

@@ -1,7 +1,7 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/json';
-const WEATHER_URL = 'api.openweathermap.org/data/2.5/weather';
+const WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
 
 function getWeather(lat, lng, callback) {
@@ -59,9 +59,20 @@ function getDetails(id) {
     dataType: 'json',
     type: 'GET',
     success: function(callBackData) { 
-                  $(`#${id}`).append(`<div>Rating: ${callBackData.result.rating}/5</div>`)
+                  let rating = callBackData.result.rating;
+                  let phone = callBackData.result.formatted_phone_number;
+
+                  if(rating===undefined) { let rating = 'not yet rated';
+                    $(`#${id}`).append(`<div>Rating: ${rating}</div>`)
+                  }
+                  else {$(`#${id}`).append(`<div>Rating: ${callBackData.result.rating}/5</div>`) }
+
                   $(`#${id}`).append(`<div>${callBackData.result.formatted_address}</div>`)
-                  $(`#${id}`).append(`<div>${callBackData.result.formatted_phone_number}</div>`)
+                  
+                  if(phone===undefined) { let phone = 'Phone: unavailable';
+                    $(`#${id}`).append(`<div>${phone}</div>`)}
+                  else {$(`#${id}`).append(`<div>${callBackData.result.formatted_phone_number}</div>`)}
+                  
                   $(`#${id}`).append(`<div><a href="${callBackData.result.website}">website</a></div>`)                  
                 }}
                 
@@ -71,14 +82,14 @@ function getDetails(id) {
 function renderResult(result) {
   let id = result.place_id;
   return(`
-        <h2>     
-        <div class="results" id="${id}">${result.name}</div>
+        <h3>     
+          <div class="results" id="${id}"><span class="result-name">${result.name}</span></div>
   `);
 };
 
 function displaySearchData(callbackData) {
   const placeResults = callbackData.results.map((item, index) => renderResult(item));
-  $('.js-search-results').html(placeResults);
+  $('.js-search-results').prop('hidden', false).html(placeResults);
   displayDetails(callbackData);
 }
 
@@ -104,6 +115,7 @@ function watchSubmit() {
     const querySearchTerm = $(event.currentTarget).find('.js-search-term');
     searchTerm = querySearchTerm.val();
     
+    // reset the inputs and remove 
     queryLocationTarget.val("");
     querySearchTerm.val("");
 
@@ -113,8 +125,12 @@ function watchSubmit() {
 $(watchSubmit);
 
 function renderWeather(result) {
-  $('.js-search-results').append(`
-        <div class="results">${result.weather.description}
-        1.8*(${result.main.temp}-273)+32
-        ${result.main.humidity}</div>`);
+  let tempF = Math.round(1.8*(result.main.temp-273)+32);
+  $('#weather').html(`
+        <div class="weather">
+          <h2>Weather Forecast:</h2>
+          Condition: ${result.weather[0].description}
+          <div>Temperature: ${tempF}&deg;</div>
+          <div>Humidity: ${result.main.humidity}%</div>
+        </div>`);
 };
