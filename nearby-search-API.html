@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>Find Places & Things to Do!</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script type='text/javascript' src='config.js'></script>
 	
@@ -26,10 +26,10 @@
 
 			<div class="form-holder">
 				<form action="#" class="js-search-form">
-					<div class="form-text form">Location:</div> 
-						<input type="text" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
-					<div class="form-text form">What are you looking for?</div> 
-						<input type="text" name="search-term" class="js-search-term form" placeholder="museums, parks, music, food, etc..." size="28">
+					<label for="location" class="form-text form">Location:</label> 
+						<input type="text" id="location" name="location" class="js-location-search form" placeholder="Intersection, City, or Zipcode, etc..." size="28">
+					<label for="search-term" class="form-text form">What are you looking for?</label> 
+						<input type="text" id="search-term" name="search-term" class="js-search-term form" placeholder="museums, parks, music, food, etc..." size="28">
 					<button class="form" type="submit">Search</button>
 				</form>
 				<div id="weather"></div>
