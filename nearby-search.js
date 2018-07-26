@@ -1,7 +1,7 @@
 const LOCATION_SEARCH_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const NEARBY_SEARCH_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 const PLACE_DETAILS = 'https://maps.googleapis.com/maps/api/place/details/json';
-const WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 searchTerm = null;
 
 function getWeather(lat, lng, callback) {
@@ -29,7 +29,7 @@ function getLocationFromApi(searchLocation, callback) {
     dataType: 'json',
     type: 'GET',
     success: callback,
-    // fail: handleFail()
+    // fail: handleFail
   };
   $.ajax(settings);  
 }
@@ -99,6 +99,7 @@ function displayDetails(callbackData) {
 }
 
 function nearbySearch(callbackData) {
+  console.log(callbackData);
   const geolocation = callbackData.results[0].geometry.location
   const {lat, lng} = geolocation
   let keyword = searchTerm;
