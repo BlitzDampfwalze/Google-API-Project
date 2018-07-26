@@ -28,7 +28,8 @@ function getLocationFromApi(searchLocation, callback) {
     },
     dataType: 'json',
     type: 'GET',
-    success: callback
+    success: callback,
+    // fail: handleFail()
   };
   $.ajax(settings);  
 }
